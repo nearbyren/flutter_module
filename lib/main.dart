@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -44,9 +45,155 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Text("HomePage"),
+    );
+  }
+}
+
+class BookPage extends StatelessWidget {
+  const BookPage({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Text("BookPage"),
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Text("MyPage"),
+    );
+  }
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
+  Widget _currBoy = HomePage();
+
+  _onTap(int index) {
+    switch (index) {
+      case 0:
+        _currBoy = HomePage();
+        break;
+      case 1:
+        _currBoy = BookPage();
+        break;
+      case 2:
+        _currBoy = MyPage();
+        break;
+    }
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        shape: AutomaticNotchedShape(
+            RoundedRectangleBorder(), StadiumBorder(side: BorderSide())),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.people),
+              onPressed: () {},
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+}
+/*class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
+  Widget _currBoy = HomePage();
+
+  _onTap(int index) {
+    switch (index) {
+      case 0:
+        _currBoy = HomePage();
+        break;
+      case 1:
+        _currBoy = BookPage();
+        break;
+      case 2:
+        _currBoy = MyPage();
+        break;
+    }
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _currBoy,
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _onTap,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.black,
+        currentIndex: _currentIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(title: Text('首页'), icon: Icon(Icons.home)),
+          BottomNavigationBarItem(title: Text('书籍'), icon: Icon(Icons.book)),
+          BottomNavigationBarItem(
+              title: Text('我的'), icon: Icon(Icons.perm_identity))
+        ],
+      ),
+    );
+  }
+}*/
+/*class _MyHomePageState extends State<MyHomePage> {
+  static const platform = const MethodChannel('app.channel.shared.data');
+  String dataShared = "No data";
+  int _counter = 0;
+  @override
+  void initState() {
+    super.initState();
+    getSharedText();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(body: new Center(child: new Text(dataShared)));
+  }
+
+  getSharedText() async {
+    var sharedData = await platform.invokeMethod("getSharedText");
+    if (sharedData != null) {
+      setState(() {
+        dataShared = sharedData;
+      });
+    }
+  }
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -57,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
-
+*/ /*
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -108,5 +255,5 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-}
+  }*/ /*
+}*/
