@@ -51,8 +51,20 @@ class HomePage extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("HomePage"),
+    return new AppBar(
+      title: new Material(
+        color: Colors.blue,
+        child: new TabBar(
+          indicatorColor: Colors.transparent,
+          unselectedLabelColor: Colors.blue[200],
+          labelColor: Colors.white,
+          tabs: <Tab>[
+            new Tab(text: '主页'),
+            new Tab(text: '历史'),
+            new Tab(text: '书籍'),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -102,9 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _currBoy,
       bottomNavigationBar: BottomAppBar(
         shape: AutomaticNotchedShape(
             RoundedRectangleBorder(), StadiumBorder(side: BorderSide())),
@@ -125,7 +139,6 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add),
-
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
